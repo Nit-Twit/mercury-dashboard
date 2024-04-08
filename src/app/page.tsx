@@ -31,7 +31,7 @@ export default function Home() {
             href={"/support"}
             className="duration-500 transition ease-in-out text-lg hover:text-primary flex flex-row justify-center content-center items-center gap-2"
           >
-            <FaDiscord></FaDiscord>Support
+            <FaDiscord size={25}></FaDiscord>Support
           </Link>
         </div>
         <div className="flex h-full flex-row items-center justify-center mx-2">
@@ -62,24 +62,29 @@ export default function Home() {
         </HeadingText>
         <h1 className="mt-2 text-2xl">The do-all discord bot</h1>
         <div className="w-1/3 mt-20 flex flex-row items-center justify-around">
-          <h1 className="text-auto">Serving N/A servers</h1>
+          <h1 className="text-auto">Total Servers: N/A</h1>
           <h1 className="text-auto">Total Users: N/A</h1>
         </div>
       </section>
-      <section className="h-screen flex flex-col justify-center items-center gap-10">
+      <section className="h-screen flex flex-col justify-center items-center gap-10 mb-40">
         <HeadingText>
           <h1 className="tracking-wider text-5xl mt-40 font-bold w-[75vw] text-left">Why Mercury?</h1>
         </HeadingText>
-        <div className="flex flex-1 flex-col justify-center items-center gap-10">
-          <div className="flex flex-row items-center justify-around w-[70vw]">
-            <Image src="https://placehold.co/350x200.png" width={350} height={200} alt="image"></Image>
+        <div className="flex flex-1 flex-col justify-center items-center gap-10 mb-20">
+          <div className="flex flex-row items-center justify-around w-[75vw] ml-5">
+            <Image src="https://placehold.co/300x150.png" width={350} height={200} alt="image"></Image>
             <h1 className="w-1/3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis dolorum corporis ducimus dicta expedita cumque. Suscipit cumque laborum ex, dolore aut cupiditate dolores expedita rerum quasi soluta vero ullam culpa.</h1>
           </div>
-          <div className="flex flex-row items-center justify-around w-[75vw]">
+          <div className="flex flex-row items-center justify-around w-[75vw] mr-0">
             <h1 className="w-1/3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis dolorum corporis ducimus dicta expedita cumque. Suscipit cumque laborum ex, dolore aut cupiditate dolores expedita rerum quasi soluta vero ullam culpa.</h1>
-            <Image src="https://placehold.co/350x200.png" width={350} height={200} alt="image"></Image>
+            <Image src="https://placehold.co/300x150.png" width={350} height={200} alt="image"></Image>
           </div>
         </div> 
+      </section>
+      <section className="h-[25vh] bg-background border-t border-secondary">
+        <div className="flex flex-row w-full h-full items-center justify-center">
+          <div className="flex-1"></div>
+        </div>
       </section>
     </main>
   );

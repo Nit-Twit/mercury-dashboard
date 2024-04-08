@@ -1,6 +1,6 @@
-import { Big_Shoulders_Display } from "next/font/google";
+import { Nanum_Gothic } from "next/font/google";
 
-const rubik = Big_Shoulders_Display({ subsets: ["latin"], weight: "500" });
+const rubik = Nanum_Gothic({ subsets: ["latin"], weight: "400" });
 
 type HeadingTextProps = {
   children: React.ReactNode;
