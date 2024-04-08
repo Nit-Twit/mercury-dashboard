@@ -7,6 +7,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontWeight: {
+      'extra-bold': '800',
+    },
     extend: {
       colors: {
         background: "var(--bg)",

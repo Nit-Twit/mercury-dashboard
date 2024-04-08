@@ -14,29 +14,4 @@ export const authOptions: NextAuthOptions = {
         authorization: {params: {scope: scopes.join(" ")}},
     })
   ],
-  callbacks: {
-    async signIn({ user, account, profile }) {
-        console.log(user, profile, account)
-      return true;
-    },
-    async jwt({ token, user }) {
-      if (!token.userId && user) {
-        console.log(token, user)
-        // token.userId = user.userId;
-      }
-      return token;
-    },
-    async session({ token, session, user }) {
-      if (token) {
-        if (session.user) {
-          (session.user as any).userId = token.userId;
-        } else {
-          session.user = {
-          };
-        }
-      }
-      console.log(token, session, user)
-      return session;
-    },
-  },
 };
