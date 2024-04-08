@@ -2,8 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaBook, FaInfoCircle, FaDiscord } from "react-icons/fa";
 import { HeadingText } from "./components/text";
+import signIn from "next-auth/react";
+import LoginButton from "./components/loginButton";
+import LogoutButton from "./components/logoutButton"
+import { getSession } from "next-auth/react";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSession()
+  console.log(session)
   return (
     <main className="flex flex-col">
       <section className=" sticky top-0 bg-background flex flex-row h-auto mx-2 items-center justify-center w-auto border-b border-secondary">
@@ -43,14 +49,7 @@ export default function Home() {
               <h1 className="tracking-wider">Add to server</h1>
             </HeadingText>
           </Link>
-          <Link
-            className="bg-primary w-auto text-xl rounded-sm px-4 py-2 mx-2 text-center"
-            href={"/login"}
-          >
-            <HeadingText>
-              <h1 className="tracking-wider font-thin">Login</h1>
-            </HeadingText>
-          </Link>
+          {session ? <LogoutButton></LogoutButton> : <LoginButton></LoginButton>}
         </div>
       </section>
 
