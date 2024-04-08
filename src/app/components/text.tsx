@@ -1,6 +1,6 @@
-import { Rubik } from "next/font/google";
+import { Big_Shoulders_Display } from "next/font/google";
 
-const rubik = Rubik({ subsets: ["latin"], weight: "400" });
+const rubik = Big_Shoulders_Display({ subsets: ["latin"], weight: "700" });
 
 type HeadingTextProps = {
   children: React.ReactNode;
