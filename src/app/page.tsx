@@ -23,8 +23,8 @@ export default function Home() {
         <HeadingText><h1 className="text-6xl text-primary">Mercury</h1></HeadingText>
         <h1 className="mt-2 text-2xl">The do-all discord bot</h1>
         <div className="w-1/3 mt-20 flex flex-row items-center justify-around">
-          <h1>Total Servers: N/A</h1>
-          <h1>Commands Ran: N/A</h1>
+          <h1>Serving N/A servers</h1>
+          <h1>Total Users: N/A</h1>
         </div>
       </section>
     </main>
