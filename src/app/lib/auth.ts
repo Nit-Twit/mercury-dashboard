@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     Discord({
         clientId: "1083899830323118080",
-        clientSecret: "11Q3M89lPAc3d_k-elg3p3dww32WH8PG",
+        clientSecret: process.env.DISCORD_SECRET as string,
         authorization: {params: {scope: scopes.join(" ")}},
     })
   ],
