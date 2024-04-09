@@ -4,7 +4,7 @@ import { FaBook, FaInfoCircle, FaDiscord, FaAngleDown } from "react-icons/fa";
 import { HeadingText } from "./components/text";
 import signIn from "next-auth/react";
 import LoginButton from "./components/loginButton";
-import LogoutButton from "./components/logoutButton"
+import LogoutButton from "./components/logoutButton";
 import { getServerSession } from "next-auth";
 import ProgressBar from "./components/x";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const session = await getServerSession()
+  const session = await getServerSession();
 
   return (
     <main className="flex flex-col">
@@ -57,7 +57,11 @@ export default async function Home() {
                 <h1 className="tracking-wider">Add to server</h1>
               </HeadingText>
             </Link>
-            {session ? <LogoutButton></LogoutButton> : <LoginButton></LoginButton>}
+            {session ? (
+              <LogoutButton></LogoutButton>
+            ) : (
+              <LoginButton></LoginButton>
+            )}
           </div>
         </div>
         <ProgressBar></ProgressBar>
@@ -77,40 +81,105 @@ export default async function Home() {
       </section>
 
       <section className="flex flex-col items-center justify-center h-[5vh] mb-40 w-full bg-background">
-        <h1 className="text-secondary"><FaAngleDown className="hover-animation text-xl"></FaAngleDown></h1>
+        <h1 className="text-secondary">
+          <FaAngleDown className="hover-animation text-xl"></FaAngleDown>
+        </h1>
       </section>
-      
+
       <section className="h-screen flex flex-col justify-center items-center gap-10 mb-40">
         <HeadingText>
-          <h1 className="tracking-wider text-5xl mt-40 font-bold w-[75vw] text-left">Why Mercury?</h1>
+          <h1 className="tracking-wider text-5xl mt-40 font-bold w-[75vw] text-left">
+            Why Mercury?
+          </h1>
         </HeadingText>
         <div className="flex flex-1 flex-col justify-center items-center gap-10 mb-20">
           <div className="flex flex-row items-center justify-around w-[75vw]">
-            <Image src="https://placehold.co/300x150.png" width={350} height={200} alt="image"></Image>
-            <h1 className="w-1/3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis dolorum corporis ducimus dicta expedita cumque. Suscipit cumque laborum ex, dolore aut cupiditate dolores expedita rerum quasi soluta vero ullam culpa.</h1>
+            <Image
+              src="https://placehold.co/300x150.png"
+              width={350}
+              height={200}
+              alt="image"
+            ></Image>
+            <div className="w-1/3 h-full">
+              <HeadingText>
+                <h1 className="text-2xl w-full text-right font-bold">
+                  Reaction roles
+                </h1>
+              </HeadingText>
+              <ul className="h-full text-right list-disc list-inside">
+                <li>dZSADAS</li>
+              </ul>
+            </div>
           </div>
+
           <div className="flex flex-row items-center justify-around w-[75vw]">
-            <h1 className="w-1/3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis dolorum corporis ducimus dicta expedita cumque. Suscipit cumque laborum ex, dolore aut cupiditate dolores expedita rerum quasi soluta vero ullam culpa.</h1>
-            <Image src="https://placehold.co/300x150.png" width={350} height={200} alt="image"></Image>
+            <div className="w-1/3 h-full">
+              <HeadingText>
+                <h1 className="text-2xl w-full text-left font-bold">
+                  Smooth moderation
+                </h1>
+              </HeadingText>
+              <ul className="h-full text-left list-disc list-inside">
+                <li>dZSADAS</li>
+              </ul>
+            </div>
+            <Image
+              src="https://placehold.co/300x150.png"
+              width={350}
+              height={200}
+              alt="image"
+            ></Image>
           </div>
+
           <div className="flex flex-row items-center justify-around w-[75vw]">
-            <Image src="https://placehold.co/300x150.png" width={350} height={200} alt="image"></Image>
-            <h1 className="w-1/3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis dolorum corporis ducimus dicta expedita cumque. Suscipit cumque laborum ex, dolore aut cupiditate dolores expedita rerum quasi soluta vero ullam culpa.</h1>
+            <Image
+              src="https://placehold.co/300x150.png"
+              width={350}
+              height={200}
+              alt="image"
+            ></Image>
+            <div className="w-1/3 h-full">
+              <HeadingText>
+                <h1 className="text-2xl w-full text-right font-bold">
+                  Message logging
+                </h1>
+              </HeadingText>
+              <ul className="h-full text-right list-disc list-inside">
+                <li>dZSADAS</li>
+              </ul>
+            </div>
           </div>
-        </div> 
+        </div>
       </section>
+
       <section className="h-[25vh] bg-background border-t border-secondary">
         <div className="flex flex-row w-full h-full items-center justify-center">
           <div className="flex-1">
             <div className="px-4">
               <HeadingText>
-                <h1 className="font-extra-bold text-xl tracking-wider">Mercury</h1>
+                <h1 className="font-extra-bold text-xl tracking-wider">
+                  Mercury
+                </h1>
               </HeadingText>
-              <h1 className="font-thin">Bot created by ApolloActive<br></br>Dashboard maintained by NitTwit_<br></br>All rights reserved</h1>
+              <h1 className="font-thin">
+                Bot created by ApolloActive<br></br>Dashboard maintained by
+                NitTwit_<br></br>All rights reserved
+              </h1>
             </div>
           </div>
-          <div className="flex-1">
-            <h1 className="font-extra-bold"><HeadingText>Mercury</HeadingText></h1>
+
+          <div className="flex-1 flex justify-end items-center flex-row mx-4">
+            <div className="flex flex-col justify-center items-end h-full text-right">
+              <Link className="hover:underline" href={"/support"}>
+                Support Server
+              </Link>
+              <Link className="hover:underline" href={"/dashboard"}>
+                Dashboard
+              </Link>
+              <Link className="hover:underline" href={"/docs"}>
+                Docs
+              </Link>
+            </div>
           </div>
         </div>
       </section>
