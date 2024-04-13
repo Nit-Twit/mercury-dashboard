@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaBook, FaInfoCircle, FaDiscord, FaAngleDown } from "react-icons/fa";
-import { HeadingText } from "./components/text";
+import { HeadingText } from "@/components/text";
 import signIn from "next-auth/react";
-import LoginButton from "./components/loginButton";
-import LogoutButton from "./components/logoutButton"
+import LoginButton from "@/components/loginButton";
+import LogoutButton from "@/components/logoutButton"
 import { getServerSession } from "next-auth";
-import DashboardButton from "./components/dashboardButton";
-import SupportButton from "./components/supportButton";
+import DashboardButton from "@/components/dashboardButton";
+import SupportButton from "@/components/supportButton";
+import HomeBtn from "@/components/homeButton";
 
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "• Mercury | Not Found",
   description: "Welcome!",
@@ -64,14 +66,7 @@ export default async function NotFound() {
       <section className="flex-1 flex flex-col items-center justify-center">
         <h1 className="text-6xl text-primary"><HeadingText>Not Found</HeadingText></h1>
         <div className="flex flex-row w-full items-center justify-center">
-            <Link
-                className="bg-secondary w-auto text-xl rounded-sm px-4 py-2 my-4 mx-2 text-center"
-                href={"/"}
-              >
-                <HeadingText>
-                  <h1 className="tracking-wider">Home</h1>
-                </HeadingText>
-              </Link>
+              <HomeBtn />
               {session ? <DashboardButton></DashboardButton> : <SupportButton></SupportButton>}
         </div>
       </section>

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaBook, FaInfoCircle, FaDiscord, FaAngleDown } from "react-icons/fa";
-import { HeadingText } from "./components/text";
+import { HeadingText } from "@/components/text";
 import signIn from "next-auth/react";
-import LoginButton from "./components/loginButton";
-import LogoutButton from "./components/logoutButton";
+import LoginButton from "@/components/loginButton";
+import LogoutButton from "@/components/logoutButton";
 import { getServerSession } from "next-auth";
-import ProgressBar from "./components/x";
+import ProgressBar from "@/components/x";
 
 import type { Metadata } from "next";
 export const metadata: Metadata = {
@@ -107,7 +107,7 @@ export default async function Home() {
                 </h1>
               </HeadingText>
               <ul className="h-full text-right list-disc list-inside">
-                <li>dZSADAS</li>
+                <li></li>
               </ul>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default async function Home() {
                 </h1>
               </HeadingText>
               <ul className="h-full text-left list-disc list-inside">
-                <li>dZSADAS</li>
+                <li></li>
               </ul>
             </div>
             <Image
@@ -145,7 +145,7 @@ export default async function Home() {
                 </h1>
               </HeadingText>
               <ul className="h-full text-right list-disc list-inside">
-                <li>dZSADAS</li>
+                <li></li>
               </ul>
             </div>
           </div>
