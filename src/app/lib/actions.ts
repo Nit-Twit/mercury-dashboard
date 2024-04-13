@@ -200,6 +200,34 @@ export async function changeBotNickname(guildId: string, nick: string) {
   }
 }
 
-export async function getBotGuilds() {
-  
+export async function totalBotGuilds() {
+  try {
+    const response = await fetch(
+      "https://discord.com/api/v10/users/@me/guilds?with_counts=true",
+      {
+        headers: {
+          Authorization: `Bot ${process.env.BOT_TOKEN}`,
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch bot guilds: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const guilds = await response.json() as DiscordServer[];
+    let totalmem = 0;
+    guilds.map((guild) => {
+      totalmem += Number((guild as unknown as { approximate_member_count: string }).approximate_member_count ?? 0);
+    })
+    return {
+      totalGuilds: guilds.length,
+      totalMembers: totalmem
+    };
+  } catch (error) {
+    console.error("Error fetching user guilds:", error);
+    throw error;
+  }
 }

@@ -9,6 +9,7 @@ import { getServerSession } from "next-auth";
 import ProgressBar from "@/components/x";
 
 import type { Metadata } from "next";
+import { totalBotGuilds } from "./lib/actions";
 export const metadata: Metadata = {
   title: "• Mercury | Welcome",
   description: "Welcome!",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const session = await getServerSession();
+  const stats = await totalBotGuilds()
 
   return (
     <main className="flex flex-col">
@@ -75,8 +77,8 @@ export default async function Home() {
         </HeadingText>
         <h1 className="mt-2 text-2xl">The do-all discord bot</h1>
         <div className="w-1/3 mt-20 flex flex-row items-center justify-around">
-          <h1 className="text-auto">Total Servers: N/A</h1>
-          <h1 className="text-auto">Total Users: N/A</h1>
+          <h1 className="text-auto">Total Servers: {stats.totalGuilds}</h1>
+          <h1 className="text-auto">Total Users: {stats.totalMembers}</h1>
         </div>
       </section>
 
