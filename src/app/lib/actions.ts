@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { REST, Routes, Guild as DiscordServer } from "discord.js";
+import { Guild as DiscordServer } from "discord.js";
 import { getServerSession } from "next-auth";
 
 export type User = {
@@ -32,32 +32,35 @@ export async function refreshAccessToken(refToken: string) {
   const refreshToken = refToken; // Assuming you have the refresh token in an environment variable
 
   const requestBody = {
-      grant_type: 'refresh_token',
-      refresh_token: refreshToken
+    grant_type: "refresh_token",
+    refresh_token: refreshToken,
   };
 
   try {
-      const response = await fetch('https://discord.com/api/oauth2/token', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              // You may also need to include client ID and client secret in the headers
-              'Authorization': `Basic ${Buffer.from(`${process.env.id}:${process.env.DISCORD_SECRET}`).toString('base64')}`
-          },
-          body: new URLSearchParams(requestBody)
-      });
+    const response = await fetch("https://discord.com/api/oauth2/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        // You may also need to include client ID and client secret in the headers
+        Authorization: `Basic ${Buffer.from(
+          `${process.env.id}:${process.env.DISCORD_SECRET}`
+        ).toString("base64")}`,
+      },
+      body: new URLSearchParams(requestBody),
+    });
 
+    if (!response.ok) {
+      throw new Error(
+        `Failed to refresh access token: ${response.status} ${response.statusText}`
+      );
+    }
 
-      if (!response.ok) {
-          throw new Error(`Failed to refresh access token: ${response.status} ${response.statusText}`);
-      }
-
-      const responseData = await response.json();
-      const newAccessToken = responseData.access_token;
-      return newAccessToken;
+    const responseData = await response.json();
+    const newAccessToken = responseData.access_token;
+    return newAccessToken;
   } catch (error) {
-      console.error('Error refreshing access token:', error);
-      throw error;
+    console.error("Error refreshing access token:", error);
+    throw error;
   }
 }
 
@@ -108,60 +111,91 @@ export async function updateTokenSet(data: User) {
 }
 
 export async function fetchUserGuilds() {
-  const session = await getServerSession()
-  if (!session) return false
-  const user = await fetchUserFromUsername(session?.user?.name as string) as User
-  const accessToken = user.acctoken
+  const session = await getServerSession();
+  if (!session) return false;
+  const user = (await fetchUserFromUsername(
+    session?.user?.name as string
+  )) as User;
+  const accessToken = user.acctoken;
   try {
-      const response = await fetch('https://discord.com/api/v10/users/@me/guilds', {
-          headers: {
-              Authorization: `Bearer ${accessToken}`
-          }
-      });
-
-      if (!response.ok) {
-          throw new Error(`Failed to fetch user guilds: ${response.status} ${response.statusText}`);
+    const response = await fetch(
+      "https://discord.com/api/v10/users/@me/guilds",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       }
+    );
 
-      const guilds = await response.json();
-      return filterGuildsByPermission(guilds) as any[1];
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch user guilds: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const guilds = await response.json();
+    return filterGuildsByPermission(guilds) as any[1];
   } catch (error) {
-      console.error('Error fetching user guilds:', error);
-      throw error;
+    console.error("Error fetching user guilds:", error);
+    throw error;
   }
 }
 
 export function filterGuildsByPermission(guilds: any[]) {
   const filteredGuilds = guilds.filter((guild) => {
-      const member = guild.permissions & 0x00000002;
-      return member === 0x00000002;
+    const member = guild.permissions & 0x00000002;
+    return member === 0x00000002;
   });
   return filteredGuilds;
 }
 
 export async function fetchGuildFromID(id: string) {
-  const session = await getServerSession()
-  if (!session) return false
+  const session = await getServerSession();
+  if (!session) return false;
   try {
-      const guilds = await fetchUserGuilds() as DiscordServer[]
-      let g: boolean | DiscordServer = false;
-      guilds.map((guild) => {
-        if (guild.id == id) {
-          g = guild as DiscordServer;
-        }
-      })
-
-      if (g) {
-        return g as DiscordServer
-      } else {
-        return false
+    const guilds = (await fetchUserGuilds()) as DiscordServer[];
+    let g: boolean | DiscordServer = false;
+    guilds.map((guild) => {
+      if (guild.id == id) {
+        g = guild as DiscordServer;
       }
+    });
+
+    if (g) {
+      return g as DiscordServer;
+    } else {
+      return false;
+    }
   } catch (error) {
-      console.error('Error fetching guild:', error);
-      throw error;
+    console.error("Error fetching guild:", error);
+    throw error;
   }
 }
 
-export async function changeBotNickname(guildId: string) {
-  const guild = await fetchGuildFromID(guildId)
+export async function changeBotNickname(guildId: string, nick: string) {
+  const guild = await fetchGuildFromID(guildId);
+  if (guild) {
+    const response = await fetch(
+      `https://discord.com/api/v10/guilds/${guild.id}/members/@me`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bot ${process.env.BOT_TOKEN}`,
+          "Content-Type": "application/json",
+          "X-Audit-Log-Reason": "Change bot nickname from dashboard",
+        },
+        body: JSON.stringify({ nick }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Error setting username: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const res = await response.json();
+    console.log(res);
+    return res;
+  }
 }
