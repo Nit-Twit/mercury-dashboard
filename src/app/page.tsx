@@ -17,10 +17,32 @@ export const metadata: Metadata = {
   themeColor: "#e72e6b",
   openGraph: {
     title: "Mercury Dashboard",
-    images: "/public/mercury_logo.png",
     description: "Easily manage Mercury with the official Dashboard",
-    url: "https://mercury-bot.vercel.app"
-  }
+    url: "https://mercury-bot.vercel.app",
+    siteName: 'Next.js',
+    images: [
+      {
+        url: 'https://mercury-bot.vercel.app/mercury_logo.png', // Must be an absolute URL
+        width: 200,
+        height: 200,
+      },
+    ],
+    locale: 'en_US',
+    type: "website",
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default async function Home() {
