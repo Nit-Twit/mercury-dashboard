@@ -7,6 +7,7 @@ import LoginButton from "@/components/loginButton";
 import LogoutButton from "@/components/logoutButton";
 import { getServerSession } from "next-auth";
 import ProgressBar from "@/components/x";
+import { Viewport } from "next";
 
 import type { Metadata } from "next";
 import { totalBotGuilds } from "./lib/actions";
@@ -44,6 +45,10 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: '#e72e6b',
+}
 
 export default async function Home() {
   const session = await getServerSession();

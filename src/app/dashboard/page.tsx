@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { fetchUserGuilds } from "../lib/actions";
@@ -45,6 +45,10 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: '#e72e6b',
+}
 
 export default async function Dashboard() {
   const session = await getServerSession();
