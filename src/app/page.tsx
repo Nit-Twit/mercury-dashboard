@@ -10,9 +10,17 @@ import ProgressBar from "@/components/x";
 
 import type { Metadata } from "next";
 import { totalBotGuilds } from "./lib/actions";
+
 export const metadata: Metadata = {
   title: "• Mercury | Welcome",
-  description: "Welcome!",
+  description: "The official dashboard for the mercury discord bot!",
+  themeColor: "#e72e6b",
+  openGraph: {
+    title: "Mercury Dashboard",
+    images: "/public/mercury_logo.png",
+    description: "Easily manage Mercury with the official Dashboard",
+    url: "https://mercury-bot.vercel.app"
+  }
 };
 
 export default async function Home() {
