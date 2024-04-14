@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   description: "The official dashboard for the mercury discord bot!",
   themeColor: "#e72e6b",
   openGraph: {
-    title: "Mercury Dashboard",
+    title: "• Mercury | Welcome",
     description: "Easily manage Mercury with the official Dashboard",
     url: "https://mercury-bot.vercel.app",
-    siteName: 'Next.js',
+    siteName: 'Mercury Dashboard',
     images: [
       {
         url: 'https://mercury-bot.vercel.app/mercury_logo.png', // Must be an absolute URL
-        width: 200,
-        height: 200,
+        width: 25,
+        height: 25,
       },
     ],
     locale: 'en_US',

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Mercury Dashboard",
     description: "Easily manage Mercury with the official Dashboard",
     url: "https://mercury-bot.vercel.app",
-    siteName: 'Next.js',
+    siteName: 'Mercury Dashboard',
     images: [
       {
         url: 'https://mercury-bot.vercel.app/mercury_logo.png', // Must be an absolute URL

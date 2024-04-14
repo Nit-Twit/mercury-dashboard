@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Mercury Dashboard",
     description: "Easily manage Mercury with the official Dashboard",
     url: "https://mercury-bot.vercel.app",
-    siteName: 'Next.js',
+    siteName: 'Mercury Dashboard',
     images: [
       {
         url: 'https://mercury-bot.vercel.app/mercury_logo.png', // Must be an absolute URL
@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: '#e72e6b',
+}
 
 export default function RootLayout({
   children,
