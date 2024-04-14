@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       follow: false,
       noimageindex: true,
       'max-video-preview': -1,
-      'max-image-preview': 'large',
+      'max-image-preview': 'standard',
       'max-snippet': -1,
     },
   },
