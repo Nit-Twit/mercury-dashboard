@@ -1,5 +1,7 @@
+"use server"
+
 import { sql } from "@vercel/postgres";
-import { Guild as DiscordServer } from "discord.js";
+import { Guild as DiscordServer, GuildMember as ServerMember } from "discord.js";
 import { getServerSession } from "next-auth";
 
 export type User = {
@@ -141,7 +143,7 @@ export async function fetchUserGuilds() {
   }
 }
 
-export function filterGuildsByPermission(guilds: any[]) {
+export async function filterGuildsByPermission(guilds: any[]) {
   const filteredGuilds = guilds.filter((guild) => {
     const member = guild.permissions & 0x00000002;
     return member === 0x00000002;
@@ -228,6 +230,37 @@ export async function totalBotGuilds() {
     };
   } catch (error) {
     console.error("Error fetching user guilds:", error);
+    throw error;
+  }
+}
+
+export async function checkForBotInGuild(guildId: string) {
+  const session = await getServerSession();
+  if (!session) return false;
+  try {
+    const response = await fetch(
+      `https://discord.com/api/v10/guilds/${guildId}/members/1083899830323118080`,
+      {
+        headers: {
+          Authorization: `Bot ${process.env.BOT_TOKEN}`,
+        },
+      }
+    );    
+
+    if (response.status === 404) {
+      return false
+    }
+
+    if (!response.ok && response.status !== 404) {
+      throw new Error(
+        `Failed to fetch user guilds: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const memberInfo = await response.json() as ServerMember;
+    return memberInfo
+  } catch (error) {
+    console.error("Error checking for bot:", error);
     throw error;
   }
 }
